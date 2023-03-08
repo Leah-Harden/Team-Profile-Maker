@@ -2,9 +2,10 @@
 const Employee = require('../lib/Employee.js');
 
 
-describe('Visibility', () => {
-  it('Characters that are digits or letters should not be visible', () => {
-    expect(new Letter('j').visible).toBe(false);
+describe('functions', () => {
+  const Mike = new Employee(`Mike`,432,`Mike@gmail.com`)
+  it('this is me grab the name', () => {
+    expect(Mike).toBe(false);
   });
 
 })
