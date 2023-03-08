@@ -8,6 +8,13 @@ test('this is me grab the name', () => {
   expect(Mike.name).toBe(name);
   
 });
+test('this is the function  getName', () => {
+  const name = `Mike`
+  const Mike = new Employee(name,432,`email`)
+  
+  expect(getName(Mike)).toBe(`this is my name,`+ name);
+  
+})
 it('this is me grab the id ', () => {
   const id = 432
   const Mike = new Employee(`Mike`,id,`email`)

@@ -8,7 +8,12 @@ askToPlayAgain() {
         type: "confirm",
         name: "choice",
         message: "Play Again?"
-      }
+      },
+      {
+        type: "confirm",
+        name: "choice",
+        message: "Play Again?"
+      },
     ])
     .then(val => {
 
