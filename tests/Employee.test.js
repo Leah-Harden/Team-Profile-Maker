@@ -1,20 +1,10 @@
-// TODO: Import the parent class
+
+const Employee = require('../lib/Employee.js');
 
 
+describe('Visibility', () => {
+  it('Characters that are digits or letters should not be visible', () => {
+    expect(new Letter('j').visible).toBe(false);
+  });
 
-class Car extends Vehicle {
-  constructor(id,color,carPassengers) {
-    super(id, 4 , "beep")
-    this.carPassengers = carPassengers
-    this.color = color
-  }
-  checkPassengers() {
-    console.log("this are the people" + this.carPassengers )
-  }
-  useHorn(){
-    console.log(this.sound)
-  }
-
-}
-
-
+})

@@ -1,5 +1,6 @@
-// TODO: Import the parent class
 
+const Employee = require('./Employee.js');
+const Engineer = require('./Engineer.js');
 
 
 class Car extends Vehicle {
