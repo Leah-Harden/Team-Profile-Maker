@@ -2,5 +2,28 @@
   "dependencies": {
     "inquirer": "^8.2.4",
     "jest": "^29.5.0"
-  }
+  },
+  "name": "team-profile-maker",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Leah-Harden/Team-Profile-Maker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Leah-Harden/Team-Profile-Maker/issues"
+  },
+  "homepage": "https://github.com/Leah-Harden/Team-Profile-Maker#readme"
 }
