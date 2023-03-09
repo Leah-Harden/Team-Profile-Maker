@@ -1,4 +1,4 @@
-// TODO: Import the parent class
+const inquirer = require('inquirer')
 
 
 const startTheProgram = () => {
@@ -33,9 +33,60 @@ const startTheProgram = () => {
     .then(val => {
 
       if (val.choice) {
-        this.play();
+        roleSwitch();
       } else {
-        this.quit();
+      console.log('fin');
       }
     });
+}
+
+const roleSwitch=() => {
+  switch(startTheProgram.role) {
+    case Engieer:
+      engieerRole()
+    break;
+    case Intern:
+      internRole()
+    break;
+    case Manager:
+      managerRole()
+    break;
+  }
+}
+
+const engieerRole=() => {
+  inquirer
+    .prompt([
+      {
+        type: 'input',
+        name: 'gitHub',
+        message: 'What is there there gitHub?',
+        validate: (value) => { if (value) { return true } else { return `Please fill in the blank.` } },
+      },
+      {
+        type: 'input',
+        name: 'again',
+        message: 'You have finished an employee. Would you like to add aunthor?',
+        validate: (value) => { if (value) { return true } else { return `Please fill in the blank.` } },
+      },
+    ])
+    .then(val => {
+        switch(startTheProgram.role) {
+          case Engieer:
+            engieerRole()
+          break;
+        ;
+      } else {
+      console.log('fin');
+      }
+    });
+}
+
+
+const internRole=() => {
+
+}
+
+const managerRole=() => {
+
 }
