@@ -24,7 +24,7 @@ it('this is me grab the id ', () => {
 
 test('this is the function getId()', () => {
   const id = 432
-  const Mike = new Employee('name', 432,`email`)
+  const Mike = new Employee('Mike', 432,`email`)
   expect(Mike.getId()).toBe(`this is my id, `+ id);
 })
 

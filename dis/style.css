@@ -5,3 +5,15 @@ h1 {
     color: rgb(255, 255, 255);
     font-weight: bold;
 }
+
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10%;
+}
+
+.myCard {
+    margin: 1%;
+    min-height: 220px;
+}

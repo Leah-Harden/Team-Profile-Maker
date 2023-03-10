@@ -70,6 +70,7 @@ const engieerRole=() => {
       },
     ])
     .then(val => {
+
         switch(val) {
           case true:
             startTheProgram()
@@ -134,4 +135,18 @@ const managerRole=() => {
           console.log('done')
     }
   });
+}
+
+function generateReadMe(questions) {
+
+
+const template =  ` 
+
+
+
+
+
+`
+return template
+
 }
