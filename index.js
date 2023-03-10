@@ -23,7 +23,7 @@ const basicQuestions = [
     type: 'list',
     name: 'role',
     message: 'What this their role? ',
-    choices: ['Engieer', 'Intern', 'Manager'],
+    choices: ['Engineer', 'Intern', 'Manager'],
     validate: (value) => { if (value) { return true } else { return `Please pick a role for this employee.` } },
   }
 ]
@@ -43,19 +43,19 @@ const startTheProgram = () => {
 
 const roleSwitch = (basicQuestions) => {
   switch (basicQuestions.role) {
-    case Engieer:
-      engieerRole()
+    case Engineer:
+      engineerRole(basicQuestions)
       break;
     case Intern:
-      internRole()
+      internRole(basicQuestions)
       break;
     case Manager:
-      managerRole()
+      managerRole(basicQuestions)
       break;
   }
 }
 
-const engieerRole = () => {
+const engineerRole = (basicQuestions) => {
   inquirer
     .prompt([
       {
@@ -72,6 +72,8 @@ const engieerRole = () => {
       },
     ])
     .then(val => {
+// add here
+
 
       switch (val) {
         case true:
@@ -84,7 +86,7 @@ const engieerRole = () => {
 }
 
 
-const internRole = () => {
+const internRole = (basicQuestions) => {
 
   inquirer
     .prompt([
@@ -112,7 +114,7 @@ const internRole = () => {
     });
 }
 
-const managerRole = () => {
+const managerRole = (basicQuestions) => {
   inquirer
     .prompt([
       {
@@ -139,23 +141,35 @@ const managerRole = () => {
     });
 }
 
-function generate(questions) {
-
-
+function generate(basicQuestions,role) {
+  switch (basicQuestions.role) {
+    case Engineer:
+      templateEngineer(basicQuestions,role)
+      break;
+    case Intern:
+      templateIntern(basicQuestions,role)
+      break;
+    case Manager:
+      templateManager(basicQuestions,role)
+      break;
+  }
 }
+function generateEngineer(basicQuestions,role){
 
-const templateEngineer = ` 
-<div class="card myCard" style="width: 18rem;">
-<div class="card-body">
-    <h5 class="card-title">Engineer</h5>
-    <hr>
-    <h6 class="card-subtitle mb-2 ">Name</h6>
-    <p class="card-text"> ID: id</p>
-    <a class="card-link">email@lotmail.com</a>
-    <a class="card-link" href="#">GitHub</a>
-</div>
-</div>
-`
+  const templateEngineer = ` 
+  <div class="card myCard" style="width: 18rem;">
+  <div class="card-body">
+  <h5 class="card-title">Engineer</h5>
+  <hr>
+  <h6 class="card-subtitle mb-2 ">${basicQuestions.name}</h6>
+  <p class="card-text"> ID:${basicQuestions.id}</p>
+  <a class="card-link">${basicQuestions.email}</a>
+  <a class="card-link" href="#">${role.github}</a>
+  </div>
+  </div>
+  `
+  return templateEngineer
+}
 //return templateEngineer
 
 const templateIntern = ` 
