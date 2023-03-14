@@ -37,12 +37,18 @@ const firstQuestions = [
     message: 'What is their office number?',
     validate: (value) => { if (value) { return true } else { return `Please fill in the blank.` } },
   },
-  {
-    type: 'comfirm',
-    name: 'done',
-    message: 'You have finished your manager. Would you like to add employee?',
-    validate: (value) => { if (value) { return true } else { return `Please fill in the blank.` } },
-  },
+]
+
+
+
+
+const firstAsk = [
+{
+  type: 'comfirm',
+  name: 'done',
+  message: 'You have finished your manager. Would you like to add employee?',
+  validate: (value) => { if (value) { return true } else { return `Please fill in the blank.` } },
+},
 ]
 
 const basicQuestions = [
@@ -72,15 +78,16 @@ const basicQuestions = [
     validate: (value) => { if (value) { return true } else { return `Please pick a role for this employee.` } },
   },
   //fix
-  {
-    type: 'comfirm',
-    name: 'again',
-    message: 'You have finished your employee. Would you like to add another employee?',
-    validate: (value) => { if (value) { return true } else { return `Please fill in the blank.` } },
-  },
-
+  
 ]
-
+const basicAsk = [
+{
+  type: 'comfirm',
+  name: 'again',
+  message: 'You have finished your employee. Would you like to add another employee?',
+  validate: (value) => { if (value) { return true } else { return `Please fill in the blank.` } },
+},
+]
 // questions  -----------------------------------------
 //Extra Roles  -----------------------------------------
 
