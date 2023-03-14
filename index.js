@@ -1,6 +1,13 @@
 const inquirer = require('inquirer')
+const employee = require('./lib/Employee')
+const manager = require('./lib/Manager')
+const intern = require('./lib/Intern')
+const engineer = require('./lib/Engineer')
+  // requites  -----------------------------------------
 
-
+let teamPlayers = [
+  
+]
 
   // questions  -----------------------------------------
 
@@ -93,7 +100,9 @@ const engineerRole = (basicQuestions) => {
       },
     ])
     .then(val => {
-      generateEngineer(basicQuestions, role)
+    
+
+      
       switch (val) {
         case true:
           inquirer
@@ -106,89 +115,119 @@ const engineerRole = (basicQuestions) => {
 }
 
 
-const internRole = (basicQuestions) => {
+// const internRole = (basicQuestions) => {
 
-  inquirer
-    .prompt([
-      {
-        type: 'input',
-        name: 'school',
-        message: 'What is their school?',
-        validate: (value) => { if (value) { return true } else { return `Please fill in the blank.` } },
-      },
-      {
-        type: 'comfirm',
-        name: 'again',
-        message: 'You have finished an employee. Would you like to add another?',
-        validate: (value) => { if (value) { return true } else { return `Please fill in the blank.` } },
-      },
-    ])
-    generateIntern(basicQuestions, role)
-    .then(val => {
-      switch (val) {
-        case true:
-          inquirer
-          .prompt(basicQuestions)
-          break;
-        case false:
-          console.log('done')
-      }
-    });
-}
+//   inquirer
+//     .prompt([
+//       {
+//         type: 'input',
+//         name: 'school',
+//         message: 'What is their school?',
+//         validate: (value) => { if (value) { return true } else { return `Please fill in the blank.` } },
+//       },
+//       {
+//         type: 'comfirm',
+//         name: 'again',
+//         message: 'You have finished an employee. Would you like to add another?',
+//         validate: (value) => { if (value) { return true } else { return `Please fill in the blank.` } },
+//       },
+//     ])
+//     generateIntern(basicQuestions)
+//     .then(val => {
+//       switch (val) {
+//         case true:
+//           inquirer
+//           .prompt(basicQuestions)
+//           break;
+//         case false:
+//           console.log('done')
+//       }
+//     });
+//   }
+
+
+
 
   //Extra Roles  -----------------------------------------
+//Objects -----------------------------------------
 
-//templates   -----------------------------------------
-function generateManager(firstQuestions) {
-const templateManager = ` 
-<div class="card myCard" style="width: 18rem;">
-<div class="card-body">
-<h5 class="card-title">Manager</h5>
-<hr>
-<h6 class="card-subtitle mb-2 ">${firstQuestions.name}</h6>
-<p class="card-text"> ID: ${firstQuestions.id}</p>
-<a class="card-link">${firstQuestions.email}</a>
-<p>${firstQuestions.officeNumber}</p>
-</div>
-</div>
-`
+const engineer = new Engineer(
+  basicQuestions.name,
+  basicQuestions.id,
+  basicQuestions.email,
+
+  
+
+
+)
+//Objects -----------------------------------------
+
+//program running  -----------------------------------------
+
+function teamGenerater() {
+
+  teamPlayers.forEach(teamPlayer => {
+    if(teamPlayer.role = 'manager'){
+      
+      function generateManager(teamPlayer) {
+        const templateManager = ` 
+        <div class="card myCard" style="width: 18rem;">
+    <div class="card-body">
+    <h5 class="card-title">Manager</h5>
+    <hr>
+    <h6 class="card-subtitle mb-2 ">${teamPlayer.name}</h6>
+    <p class="card-text"> ID: ${teamPlayer.id}</p>
+    <a class="card-link">${teamPlayer.email}</a>
+    <p>${teamPlayer.officeNumber}</p>
+    </div>
+    </div>
+    `
+  }
+  
+  
+}else if(teamPlayer.role = "engineer"){
+  
+  function generateEngineer(basicQuestions) {
+    
+    
+    const templateEngineer = ` 
+    <div class="card myCard" style="width: 18rem;">
+    <div class="card-body">
+    <h5 class="card-title">Engineer</h5>
+    <hr>
+    <h6 class="card-subtitle mb-2 ">${teamPlayer.name}</h6>
+    <p class="card-text"> ID: ${teamPlayer.id}</p>
+    <a class="card-link">${teamPlayer.email}</a>
+    <a class="card-link" href="#">${teamPlayer.github}</a>
+    </div>
+    </div>
+      `
+      return templateEngineer
+    }
+    
+    
+  }else if(teamPlayer.role = "intern"){
+    
+  }
+  function generateIntern(teamPlayer) {
+    const templateIntern = `  
+    <div class="card myCard" style="width: 18rem;">
+    <div class="card-body">
+    <h5 class="card-title">Intern</h5>
+    <hr>
+    <h6 class="card-subtitle mb-2 ">${teamPlayer.name}</h6>
+    <p class="card-text"> ID: ${teamPlayer.id}</p>
+    <a class="card-link">${teamPlayer.email}</a>
+    <p>School${teamPlayer.school}</p>
+    </div>
+    </div>
+    
+    `
+    return templateIntern
+  }
+});
+
 }
-function generateEngineer(basicQuestions) {
-  const templateEngineer = ` 
-  <div class="card myCard" style="width: 18rem;">
-  <div class="card-body">
-  <h5 class="card-title">Engineer</h5>
-  <hr>
-  <h6 class="card-subtitle mb-2 ">${basicQuestions.name}</h6>
-  <p class="card-text"> ID:${basicQuestions.id}</p>
-  <a class="card-link">${basicQuestions.email}</a>
-  <a class="card-lin
-  k" href="#">${role.github}</a>
-  </div>
-  </div>
-  `
-  return templateEngineer
-}
-
-function generateIntern(basicQuestions) {
-const templateIntern = `  
-<div class="card myCard" style="width: 18rem;">
-<div class="card-body">
-<h5 class="card-title">Intern</h5>
-<hr>
-<h6 class="card-subtitle mb-2 ">Name</h6>
-<p class="card-text"> ID: id</p>
-<a class="card-link">email@lotmail.com</a>
-<p>School</p>
-</div>
-</div>
-
-`
-return templateIntern
-}
-  //templates-----------------------------------------
-
-
 
 
 //program running  -----------------------------------------
@@ -206,16 +245,15 @@ const roleSwitch = (basicQuestions.role) => {
 const startTheProgram = () => {
   inquirer
     .prompt(firstQuestions)
-    .then({
-      generateManager(firstQuestions)
+    .then((answers) => {
+      generateManager(answers)
       if (firstQuestions.done = true) {
         inquirer
         .prompt(basicQuestions)
         roleSwitch(basicQuestions.role)
-
+//it should already geneate the text
       }
     });
-    .prompt(basicQuestions)
 }
 
 //return templateManager
