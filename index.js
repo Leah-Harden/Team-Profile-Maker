@@ -43,12 +43,12 @@ const firstQuestions = [
 
 
 const firstAsk = [
-{
-  type: 'comfirm',
-  name: 'done',
-  message: 'You have finished your manager. Would you like to add employee?',
-  validate: (value) => { if (value) { return true } else { return `Please fill in the blank.` } },
-},
+  {
+    type: 'comfirm',
+    name: 'done',
+    message: 'You have finished your manager. Would you like to add employee? type "yes" if so.',
+    validate: (value) => { if (value) { return true } else { return `Please fill in the blank.` } },
+  },
 ]
 
 const basicQuestions = [
@@ -78,15 +78,15 @@ const basicQuestions = [
     validate: (value) => { if (value) { return true } else { return `Please pick a role for this employee.` } },
   },
   //fix
-  
+
 ]
 const basicAsk = [
-{
-  type: 'comfirm',
-  name: 'again',
-  message: 'You have finished your employee. Would you like to add another employee?',
-  validate: (value) => { if (value) { return true } else { return `Please fill in the blank.` } },
-},
+  {
+    type: 'comfirm',
+    name: 'again',
+    message: 'You have finished your employee. Would you like to add another employee? type "yes" if so.',
+    validate: (value) => { if (value) { return true } else { return `Please fill in the blank.` } },
+  },
 ]
 // questions  -----------------------------------------
 //Extra Roles  -----------------------------------------
@@ -100,26 +100,19 @@ const engineerRole = (basicQuestions) => {
         message: 'What is their gitHub?',
         validate: (value) => { if (value) { return true } else { return `Please fill in the blank.` } },
       },
-      {
-        type: 'comfirm',
-        name: 'again',
-        message: 'You have finished an employee. Would you like to add aunthor?',
-        validate: (value) => { if (value) { return true } else { return `Please fill in the blank.` } },
-      },
     ])
-    .then(answers => {
-      const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
+    .then(basicQuestions, answers => {
+      const engineer = new Engineer(basicQuestions.name, basicQuestions.id, basicQuestions.email, answers.github);
       teamMembers.push(engineer);
-
-      switch (answers.again = true) {
-        case true:
-          inquirer
-            .prompt(basicQuestions)
-          break;
-        case false:
-          teamGenerater()
-          console.log('done')
-      }
+      // switch (answers.again = true) {
+      //   case true:
+      //     inquirer
+      //       .prompt(basicQuestions)
+      //     break;
+      //   case false:
+      //     teamGenerater()
+      //     console.log('done')
+      // }
     });
 }
 
@@ -158,8 +151,6 @@ const engineerRole = (basicQuestions) => {
 
 
 //Extra Roles  -----------------------------------------
-//Objects -----------------------------------------
-//Objects -----------------------------------------
 
 //program running  -----------------------------------------
 
@@ -242,19 +233,42 @@ function teamGenerater() {
 //   }
 // }
 
-const startTheProgram = () => {
-  inquirer
-    .prompt(firstQuestions)
+function managerPrompt() {
+  inquirer.prompt(firstQuestions)
     .then((firstQuestions) => {
       const manager = new Manager(firstQuestions.name, firstQuestions.id, firstQuestions.email, firstQuestions.officeNumber);
       teamMembers.push(manager)
+      startTheProgram();
     })
-    if(firstQuestions.done = false) {
-      teamGenerater() 
-    } else if(firstQuestions.done = true) {
-      inquirer
-      .prompt(basicQuestions)
-    }
-}
-startTheProgram()
 
+}
+
+
+const startTheProgram = () => {
+  //Ask
+  inquirer
+    .prompt(firstAsk)
+    .then((answer) => {
+      if (answer.done === "yes") {
+        inquirer
+          .prompt(basicQuestions)
+
+          .then(() => {
+            inquirer
+              .prompt(basicAsk)
+            if (basicAsk.again === "yes") {
+              inquirer
+                .prompt(basicQuestions)
+            } else {
+              teamGenerater()
+            }
+          })
+      } else {
+        teamGenerater()
+      }
+    }
+    )
+}
+
+
+managerPrompt()
