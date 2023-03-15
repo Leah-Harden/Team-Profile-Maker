@@ -105,15 +105,6 @@ const engineerRole = (basicQuestions) => {
     .then(basicQuestions, answers => {
       const engineer = new Engineer(basicQuestions.name, basicQuestions.id, basicQuestions.email, answers.github);
       teamMembers.push(engineer);
-      // switch (answers.again = true) {
-      //   case true:
-      //     inquirer
-      //       .prompt(basicQuestions)
-      //     break;
-      //   case false:
-      //     teamGenerater()
-      //     console.log('done')
-      // }
     });
 }
 
@@ -135,17 +126,6 @@ const engineerRole = (basicQuestions) => {
 //         validate: (value) => { if (value) { return true } else { return `Please fill in the blank.` } },
 //       },
 //     ])
-//     generateIntern(basicQuestions)
-//     .then(val => {
-//       switch (val) {
-//         case true:
-//           inquirer
-//           .prompt(basicQuestions)
-//           break;
-//         case false:
-//           console.log('done')
-//       }
-//     });
 //   }
 
 
@@ -175,7 +155,10 @@ function teamGenerater() {
     `
       }
     generateManager(teamPlayer) 
-
+.then((complete) => {
+  fs.appendFile( dist/index.html, complete)
+}
+)
     } else if (teamPlayer.role = "engineer") {
 
       function generateEngineer(teamPlayer) {
