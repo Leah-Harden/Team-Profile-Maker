@@ -169,7 +169,8 @@ inquirer
 
 function teamGenerater() {
   teamPlayers.forEach(teamPlayer => {
-    if (teamPlayer.getRole() == 'Manager') {
+    switch(teamPlayer.getRole()) {
+      case 'Manager':
 
       const templateManager = ` 
         <div class="card myCard" style="width: 18rem;">
@@ -184,10 +185,8 @@ function teamGenerater() {
     </div>
     `
       finalFile.push(templateManager)
-
-    } else if (teamPlayer.getRole() == "engineer") {
-
-
+      break;
+      case 'engineer':
       const templateEngineer = ` 
       <div class="card myCard" style="width: 18rem;">
       <div class="card-body">
@@ -202,8 +201,8 @@ function teamGenerater() {
       `
       finalFile.push(templateEngineer)
 
-    } else if (teamPlayer.getRole() == "intern") {
-    }
+      break;
+      case 'intern':
     const templateIntern = `  
     <div class="card myCard" style="width: 18rem;">
     <div class="card-body">
@@ -218,11 +217,12 @@ function teamGenerater() {
     
     `
     finalFile.push(templateIntern)
-  });
+  };
 
   finalFile.push(ending)
 
 
+})
 }
 
 
