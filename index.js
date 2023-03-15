@@ -4,7 +4,8 @@ const employee = require('./lib/Employee')
 const manager = require('./lib/Manager')
 const intern = require('./lib/Intern')
 const engineer = require('./lib/Engineer')
-const Manager = require('./lib/Manager')
+const Manager = require('./lib/Manager');
+const { generateKey } = require('crypto');
 // requites  -----------------------------------------
 
 let teamPlayers = [
@@ -250,6 +251,18 @@ function managerPrompt() {
 
 }
 
+function generateFile() {
+  teamGenerater()
+  let joinText = finalFile.join()
+  fs.writeFile( 'Team.html', joinText, err => {
+    if (err) {
+      console.error(err);
+    }
+    // file written successfully
+  });
+
+}
+
 
 const startTheProgram = () => {
   //Ask
@@ -267,15 +280,11 @@ const startTheProgram = () => {
               inquirer
                 .prompt(basicQuestions)
             } else {
-              teamGenerater()
-              let joinText = finalFile.join()
-              fs.writeFile( 'Team.html', joinText)
+              generateFile()
             }
           })
       } else {
-        teamGenerater()
-        let joinText = finalFile.join()
-        fs.writeFile( 'Team.html', joinText)
+        generateFile()
       }
     }
     )
