@@ -109,7 +109,7 @@ const basicQuestions = [
     type: 'list',
     name: 'role',
     message: 'What this their role? ',
-    choices: ['Engineer', 'Intern', 'Manager'],
+    choices: ['Engineer', 'Intern'],
     validate: (value) => { if (value) { return true } else { return `Please pick a role for this employee.` } },
   },
   //fix
@@ -143,24 +143,22 @@ const engineerRole = (basicQuestions) => {
 }
 
 
-// const internRole = (basicQuestions) => {
+const internRole = (basicQuestions) => {
 
-//   inquirer
-//     .prompt([
-//       {
-//         type: 'input',
-//         name: 'school',
-//         message: 'What is their school?',
-//         validate: (value) => { if (value) { return true } else { return `Please fill in the blank.` } },
-//       },
-//       {
-//         type: 'comfirm',
-//         name: 'again',
-//         message: 'You have finished an employee. Would you like to add another?',
-//         validate: (value) => { if (value) { return true } else { return `Please fill in the blank.` } },
-//       },
-//     ])
-//   }
+inquirer
+  .prompt([
+    {
+      type: 'input',
+      name: 'school',
+      message: 'What is their school?',
+      validate: (value) => { if (value) { return true } else { return `Please fill in the blank.` } },
+    },
+  ])
+  .then(basicQuestions, answers => {
+    const intern = new Intern(basicQuestions.name, basicQuestions.id, basicQuestions.email, answers.github);
+    teamMembers.push(intern);
+  })
+  }
 
 
 
@@ -173,7 +171,7 @@ function teamGenerater() {
   teamPlayers.forEach(teamPlayer => {
     if (teamPlayer.getRole() == 'Manager') {
 
-        const templateManager = ` 
+      const templateManager = ` 
         <div class="card myCard" style="width: 18rem;">
     <div class="card-body">
     <h5 class="card-title">Manager</h5>
@@ -185,10 +183,10 @@ function teamGenerater() {
     </div>
     </div>
     `
-    finalFile.push(templateManager)
-    
-  } else if (teamPlayer.getRole() == "engineer") {
-    
+      finalFile.push(templateManager)
+
+    } else if (teamPlayer.getRole() == "engineer") {
+
 
       const templateEngineer = ` 
       <div class="card myCard" style="width: 18rem;">
@@ -206,7 +204,7 @@ function teamGenerater() {
 
     } else if (teamPlayer.getRole() == "intern") {
     }
-      const templateIntern = `  
+    const templateIntern = `  
     <div class="card myCard" style="width: 18rem;">
     <div class="card-body">
     <h5 class="card-title">Intern</h5>
@@ -254,7 +252,7 @@ function managerPrompt() {
 function generateFile() {
   teamGenerater()
   let joinText = finalFile.join()
-  fs.writeFile( 'Team.html', joinText, err => {
+  fs.writeFile('Team.html', joinText, err => {
     if (err) {
       console.error(err);
     }
