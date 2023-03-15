@@ -1,4 +1,5 @@
 const inquirer = require('inquirer')
+const fs = require('fs');
 const employee = require('./lib/Employee')
 const manager = require('./lib/Manager')
 const intern = require('./lib/Intern')
@@ -173,13 +174,11 @@ function teamGenerater() {
     </div>
     `
       }
-
+    generateManager(teamPlayer) 
 
     } else if (teamPlayer.role = "engineer") {
 
-      function generateEngineer(basicQuestions) {
-
-
+      function generateEngineer(teamPlayer) {
         const templateEngineer = ` 
     <div class="card myCard" style="width: 18rem;">
     <div class="card-body">
@@ -192,6 +191,7 @@ function teamGenerater() {
     </div>
     </div>
       `
+      generateEngineer(teamPlayer)
         return templateEngineer
       }
 
@@ -213,6 +213,7 @@ function teamGenerater() {
     </div>
     
     `
+    generateIntern(teamPlayer)
       return templateIntern
     }
   });
@@ -237,7 +238,7 @@ function managerPrompt() {
   inquirer.prompt(firstQuestions)
     .then((firstQuestions) => {
       const manager = new Manager(firstQuestions.name, firstQuestions.id, firstQuestions.email, firstQuestions.officeNumber);
-      teamMembers.push(manager)
+      teamPlayers.push(manager)
       startTheProgram();
     })
 
