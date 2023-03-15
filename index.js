@@ -11,6 +11,39 @@ let teamPlayers = [
 
 ]
 
+let finalFile = [`<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+    <title>Team-Profile-Maker</title>
+</head>
+
+<body>
+    <header>
+        <h1>My Team</h1>
+        <div class="box">`,
+
+
+]
+// ness  -----------------------------------------
+const ending = `
+</header>
+</body>
+<script src="./index.html"></script>
+
+</html>
+`
+
+
+
+// ness  -----------------------------------------
+
 // questions  -----------------------------------------
 
 const firstQuestions = [
@@ -136,11 +169,9 @@ const engineerRole = (basicQuestions) => {
 //program running  -----------------------------------------
 
 function teamGenerater() {
-
   teamPlayers.forEach(teamPlayer => {
-    if (teamPlayer.role = 'manager') {
+    if (teamPlayer.getRole() == 'Manager') {
 
-      function generateManager(teamPlayer) {
         const templateManager = ` 
         <div class="card myCard" style="width: 18rem;">
     <div class="card-body">
@@ -153,36 +184,27 @@ function teamGenerater() {
     </div>
     </div>
     `
-      }
-    generateManager(teamPlayer) 
-.then((complete) => {
-  fs.appendFile( dist/index.html, complete)
-}
-)
-    } else if (teamPlayer.role = "engineer") {
+    finalFile.push(templateManager)
+    
+  } else if (teamPlayer.getRole() == "engineer") {
+    
 
-      function generateEngineer(teamPlayer) {
-        const templateEngineer = ` 
-    <div class="card myCard" style="width: 18rem;">
-    <div class="card-body">
-    <h5 class="card-title">Engineer</h5>
-    <hr>
-    <h6 class="card-subtitle mb-2 ">${teamPlayer.name}</h6>
-    <p class="card-text"> ID: ${teamPlayer.id}</p>
-    <a class="card-link">${teamPlayer.email}</a>
-    <a class="card-link" href="#">${teamPlayer.github}</a>
-    </div>
-    </div>
+      const templateEngineer = ` 
+      <div class="card myCard" style="width: 18rem;">
+      <div class="card-body">
+      <h5 class="card-title">Engineer</h5>
+      <hr>
+      <h6 class="card-subtitle mb-2 ">${teamPlayer.name}</h6>
+      <p class="card-text"> ID: ${teamPlayer.id}</p>
+      <a class="card-link">${teamPlayer.email}</a>
+      <a class="card-link" href="#">${teamPlayer.github}</a>
+      </div>
+      </div>
       `
-      generateEngineer(teamPlayer)
-        return templateEngineer
-      }
+      finalFile.push(templateEngineer)
 
-
-    } else if (teamPlayer.role = "intern") {
-
+    } else if (teamPlayer.getRole() == "intern") {
     }
-    function generateIntern(teamPlayer) {
       const templateIntern = `  
     <div class="card myCard" style="width: 18rem;">
     <div class="card-body">
@@ -196,10 +218,11 @@ function teamGenerater() {
     </div>
     
     `
-    generateIntern(teamPlayer)
-      return templateIntern
-    }
+    finalFile.push(templateIntern)
   });
+
+  finalFile.push(ending)
+
 
 }
 
@@ -245,10 +268,14 @@ const startTheProgram = () => {
                 .prompt(basicQuestions)
             } else {
               teamGenerater()
+              let joinText = finalFile.join()
+              fs.writeFile( 'Team.html', joinText)
             }
           })
       } else {
         teamGenerater()
+        let joinText = finalFile.join()
+        fs.writeFile( 'Team.html', joinText)
       }
     }
     )
