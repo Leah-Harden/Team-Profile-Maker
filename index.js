@@ -138,7 +138,7 @@ const engineerRole = (basicQuestions) => {
     ])
     .then(basicQuestions, answers => {
       const engineer = new Engineer(basicQuestions.name, basicQuestions.id, basicQuestions.email, answers.github);
-      teamMembers.push(engineer);
+      teamPlayers.push(engineer);
     });
 }
 
@@ -156,7 +156,7 @@ inquirer
   ])
   .then(basicQuestions, answers => {
     const intern = new Intern(basicQuestions.name, basicQuestions.id, basicQuestions.email, answers.github);
-    teamMembers.push(intern);
+    teamPlayers.push(intern);
   })
   }
 
