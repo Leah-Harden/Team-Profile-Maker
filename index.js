@@ -1,9 +1,8 @@
 const inquirer = require('inquirer')
 const fs = require('fs');
 const employee = require('./lib/Employee')
-const manager = require('./lib/Manager')
-const intern = require('./lib/Intern')
-const engineer = require('./lib/Engineer')
+const Intern = require('./lib/Intern')
+const Engineer = require('./lib/Engineer')
 const Manager = require('./lib/Manager');
 
 // requites  -----------------------------------------
@@ -131,12 +130,12 @@ const engineerRole = (basicQuestions) => {
     .prompt([
       {
         type: 'input',
-        name: 'gitHub',
+        name: 'github',
         message: 'What is their gitHub?',
         validate: (value) => { if (value) { return true } else { return `Please fill in the blank.` } },
       },
     ])
-    .then(basicQuestions, answers => {
+    .then(answers => {
       const engineer = new Engineer(basicQuestions.name, basicQuestions.id, basicQuestions.email, answers.github);
       teamPlayers.push(engineer);
     });
@@ -232,10 +231,10 @@ function teamGenerater() {
 const roleSwitch = (basicQuestions) => {
   switch (basicQuestions.role) {
     case 'Engineer':
-      engineerRole()
+      engineerRole(basicQuestions)
       break;
     case 'Intern':
-      internRole()
+      internRole(basicQuestions)
       break;
   }
 }
