@@ -1,6 +1,5 @@
 const inquirer = require('inquirer')
 const fs = require('fs');
-const employee = require('./lib/Employee')
 const Intern = require('./lib/Intern')
 const Engineer = require('./lib/Engineer')
 const Manager = require('./lib/Manager');
@@ -144,20 +143,20 @@ const engineerRole = (basicQuestions) => {
 
 const internRole = (basicQuestions) => {
 
-inquirer
-  .prompt([
-    {
-      type: 'input',
-      name: 'school',
-      message: 'What is their school?',
-      validate: (value) => { if (value) { return true } else { return `Please fill in the blank.` } },
-    },
-  ])
-  .then(basicQuestions, answers => {
-    const intern = new Intern(basicQuestions.name, basicQuestions.id, basicQuestions.email, answers.github);
-    teamPlayers.push(intern);
-  })
-  }
+  inquirer
+    .prompt([
+      {
+        type: 'input',
+        name: 'school',
+        message: 'What is their school?',
+        validate: (value) => { if (value) { return true } else { return `Please fill in the blank.` } },
+      },
+    ])
+    .then(answers => {
+      const intern = new Intern(basicQuestions.name, basicQuestions.id, basicQuestions.email, answers.github);
+      teamPlayers.push(intern);
+    })
+}
 
 
 
@@ -169,10 +168,10 @@ inquirer
 function teamGenerater() {
   console.log(teamPlayers)
   teamPlayers.forEach(teamPlayer => {
-    switch(teamPlayer.getRole()) {
+    switch (teamPlayer.getRole()) {
       case 'Manager':
 
-      const templateManager = ` 
+        const templateManager = ` 
         <div class="card myCard" style="width: 18rem;">
     <div class="card-body">
     <h5 class="card-title">Manager</h5>
@@ -184,10 +183,10 @@ function teamGenerater() {
     </div>
     </div>
     `
-      finalFile.push(templateManager)
-      break;
+        finalFile.push(templateManager)
+        break;
       case 'engineer':
-      const templateEngineer = ` 
+        const templateEngineer = ` 
       <div class="card myCard" style="width: 18rem;">
       <div class="card-body">
       <h5 class="card-title">Engineer</h5>
@@ -199,11 +198,11 @@ function teamGenerater() {
       </div>
       </div>
       `
-      finalFile.push(templateEngineer)
+        finalFile.push(templateEngineer)
 
-      break;
+        break;
       case 'intern':
-    const templateIntern = `  
+        const templateIntern = `  
     <div class="card myCard" style="width: 18rem;">
     <div class="card-body">
     <h5 class="card-title">Intern</h5>
@@ -216,13 +215,13 @@ function teamGenerater() {
     </div>
     
     `
-    finalFile.push(templateIntern)
-  };
+        finalFile.push(templateIntern)
+    };
 
-  finalFile.push(ending)
+    finalFile.push(ending)
 
 
-})
+  })
 }
 
 
@@ -249,7 +248,7 @@ function generateFile() {
     }
     // file written successfully
   });
-  
+
 }
 function managerPrompt() {
   inquirer.prompt(firstQuestions)
@@ -263,22 +262,22 @@ function managerPrompt() {
 
 function addEmployee() {
   inquirer
-          .prompt(basicQuestions)
-          .then((basicQuestions) => {
-            roleSwitch(basicQuestions)
- //          .then(() => {
-            inquirer
-              .prompt(basicAsk)
- //           })
-              .then((answer) => {
-                if (answer.again === "yes") {
-                  addEmployee()
-                } else {
-                  generateFile()
-                }
-              
-              })
-          })
+    .prompt(basicQuestions)
+    .then((basicQuestions) => {
+      roleSwitch(basicQuestions)
+      //          .then(() => {
+      inquirer
+        .prompt(basicAsk)
+        //           })
+        .then((answer) => {
+          if (answer.again === "yes") {
+            addEmployee()
+          } else {
+            generateFile()
+          }
+
+        })
+    })
 }
 
 
@@ -295,5 +294,5 @@ const startTheProgram = () => {
         generateFile()
       }
     })
-  }
+}
 managerPrompt()
