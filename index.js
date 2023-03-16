@@ -265,10 +265,11 @@ function addEmployee() {
     .prompt(basicQuestions)
     .then((basicQuestions) => {
       roleSwitch(basicQuestions)
-      //          .then(() => {
+//need a wait
+                .then(() => {
       inquirer
         .prompt(basicAsk)
-        //           })
+                  })
         .then((answer) => {
           if (answer.again === "yes") {
             addEmployee()
