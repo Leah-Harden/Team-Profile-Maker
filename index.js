@@ -5,7 +5,7 @@ const manager = require('./lib/Manager')
 const intern = require('./lib/Intern')
 const engineer = require('./lib/Engineer')
 const Manager = require('./lib/Manager');
-const { generateKey } = require('crypto');
+
 // requites  -----------------------------------------
 
 let teamPlayers = [
@@ -168,6 +168,7 @@ inquirer
 //program running  -----------------------------------------
 
 function teamGenerater() {
+  console.log(teamPlayers)
   teamPlayers.forEach(teamPlayer => {
     switch(teamPlayer.getRole()) {
       case 'Manager':
@@ -228,26 +229,17 @@ function teamGenerater() {
 
 //program running  -----------------------------------------
 
-// const roleSwitch = (basicQuestions.role) => {
-//   switch (firstQuestions.role) {
-//     case Engineer:
-//       engineerRole()
-//       break;
-//     case Intern:
-//       internRole()
-//       break;
-//   }
-// }
-
-function managerPrompt() {
-  inquirer.prompt(firstQuestions)
-    .then((firstQuestions) => {
-      const manager = new Manager(firstQuestions.name, firstQuestions.id, firstQuestions.email, firstQuestions.officeNumber);
-      teamPlayers.push(manager)
-      startTheProgram();
-    })
-
+const roleSwitch = (basicQuestions) => {
+  switch (basicQuestions.role) {
+    case 'Engineer':
+      engineerRole()
+      break;
+    case 'Intern':
+      internRole()
+      break;
+  }
 }
+
 
 function generateFile() {
   teamGenerater()
@@ -258,8 +250,37 @@ function generateFile() {
     }
     // file written successfully
   });
+  
+}
+function managerPrompt() {
+  inquirer.prompt(firstQuestions)
+    .then((firstQuestions) => {
+      const manager = new Manager(firstQuestions.name, firstQuestions.id, firstQuestions.email, firstQuestions.officeNumber);
+      teamPlayers.push(manager)
+      startTheProgram();
+    })
 
 }
+
+function addEmployee() {
+  inquirer
+          .prompt(basicQuestions)
+          .then((basicQuestions) => {
+            roleSwitch(basicQuestions)
+            inquirer
+              .prompt(basicAsk)
+              .then((answer) => {
+                if (answer.again === "yes") {
+                  addEmployee()
+                } else {
+                  generateFile()
+                }
+              
+              })
+          })
+}
+
+
 
 
 const startTheProgram = () => {
@@ -268,25 +289,10 @@ const startTheProgram = () => {
     .prompt(firstAsk)
     .then((answer) => {
       if (answer.done === "yes") {
-        inquirer
-          .prompt(basicQuestions)
-
-          .then(() => {
-            inquirer
-              .prompt(basicAsk)
-            if (basicAsk.again === "yes") {
-              inquirer
-                .prompt(basicQuestions)
-            } else {
-              generateFile()
-            }
-          })
+        addEmployee()
       } else {
         generateFile()
       }
-    }
-    )
-}
-
-
+    })
+  }
 managerPrompt()
