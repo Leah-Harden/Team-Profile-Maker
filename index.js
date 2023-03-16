@@ -267,8 +267,10 @@ function addEmployee() {
           .prompt(basicQuestions)
           .then((basicQuestions) => {
             roleSwitch(basicQuestions)
+ //          .then(() => {
             inquirer
               .prompt(basicAsk)
+ //           })
               .then((answer) => {
                 if (answer.again === "yes") {
                   addEmployee()
