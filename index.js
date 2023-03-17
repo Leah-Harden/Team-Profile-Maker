@@ -132,11 +132,22 @@ const engineerRole = (basicQuestions) => {
         name: 'github',
         message: 'What is their gitHub?',
         validate: (value) => { if (value) { return true } else { return `Please fill in the blank.` } },
-      },
+      }
     ])
     .then(answers => {
       const engineer = new Engineer(basicQuestions.name, basicQuestions.id, basicQuestions.email, answers.github);
       teamPlayers.push(engineer);
+      inquirer
+      .prompt(basicAsk)
+      //                  })
+      .then((answer) => {
+        if (answer.again === "yes") {
+          addEmployee()
+        } else {
+          generateFile()
+        }
+
+      })
     });
 }
 
@@ -150,11 +161,22 @@ const internRole = (basicQuestions) => {
         name: 'school',
         message: 'What is their school?',
         validate: (value) => { if (value) { return true } else { return `Please fill in the blank.` } },
-      },
+      }
     ])
     .then(answers => {
-      const intern = new Intern(basicQuestions.name, basicQuestions.id, basicQuestions.email, answers.github);
+      const intern = new Intern(basicQuestions.name, basicQuestions.id, basicQuestions.email, answers.school);
       teamPlayers.push(intern);
+      inquirer
+      .prompt(basicAsk)
+      //                  })
+      .then((answer) => {
+        if (answer.again === "yes") {
+          addEmployee()
+        } else {
+          generateFile()
+        }
+
+      })
     })
 }
 
@@ -228,13 +250,12 @@ function teamGenerater() {
 //program running  -----------------------------------------
 
 const roleSwitch = (basicQuestions) => {
-  switch (basicQuestions.role) {
-    case 'Engineer':
-      engineerRole(basicQuestions)
-      break;
-    case 'Intern':
-      internRole(basicQuestions)
-      break;
+  if (basicQuestions.role === 'Engineer') {
+
+    engineerRole(basicQuestions)
+
+  } else if (basicQuestions.role === 'Intern') {
+    internRole(basicQuestions)
   }
 }
 
@@ -265,19 +286,8 @@ function addEmployee() {
     .prompt(basicQuestions)
     .then((basicQuestions) => {
       roleSwitch(basicQuestions)
-//need a wait
-                .then(() => {
-      inquirer
-        .prompt(basicAsk)
-                  })
-        .then((answer) => {
-          if (answer.again === "yes") {
-            addEmployee()
-          } else {
-            generateFile()
-          }
-
-        })
+      //need a wait
+      //               .then(() => {
     })
 }
 
