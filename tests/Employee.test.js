@@ -25,7 +25,7 @@ it('this is me grab the id ', () => {
 test('this is the function getId()', () => {
   const id = 432
   const Mike = new Employee('Mike', id,`email`)
-  expect(Mike.getId()).toBe(`this is my id,${id}`);
+  expect(Mike.getId()).toBe(`this is my id, ${id}`);
 })
 
 it('this is me grab the email', () => {
@@ -37,7 +37,7 @@ it('this is me grab the email', () => {
   it('this is THE getEmail()', () => {
     const email = `Mike@gmail.com`
     const Mike = new Employee(`Mike`,432,email)
-      expect(Mike.getEmail()).toBe(email);
+      expect(Mike.getEmail()).toBe(`this is my email, ${email}`);
     });
 
 
