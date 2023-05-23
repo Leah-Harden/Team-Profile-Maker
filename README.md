@@ -1,7 +1,5 @@
 # Team-Profile-Maker
-
-This is a terminal program that allow to you to build a team for you business and manage them. You are able to add a manager,intern and engineer. These are all attach too each of other. Like every Employee will be tied to there manager. You are also able to add you own custom jobs that will be tie to each employee. All of these things can be change and altered at a whim.
-
+Welcome to the team building and management program! With this terminal program, you can easily create a team for your business and keep track of your employees. You have the option to add a manager, intern, and engineer, and each employee will be linked to their respective manager. Additionally, you can customize each employee's job. Than it will create a html page that you can open up with live server. This program offers flexibility and convenience, making it easy to manage and build a successful team. 
 
 
 ### Installing
@@ -9,18 +7,25 @@ This is a terminal program that allow to you to build a team for you business an
 Everything is here just make sure to "npm i" for the dependents.
 
 
+## Deployment
+
+To deploy this project:
+
+```bash
+ node index.js
+```
+
+After that it will create a Html file with your data that you can open.
+
+
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
 
-### Break down into end to end tests
-
-A lot of tests were done on this project to make sure it  run properly. 
+A lot of tests were done on this project to make sure it run properly.
 
 ```
-There were tests to see if models of each of the employee,Engineer,intern, and manager were getting the data and process it right. 
-
+There were tests to see if models of each of the employee, engineer, intern, and manager were getting the data and processing it right. 
 
 ```
 
